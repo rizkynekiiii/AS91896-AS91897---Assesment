@@ -49,6 +49,16 @@ def setup_buttons():
     Label(main_window, text="Row #").grid(column=2, row=8)
     entry_row = Entry(main_window)
     entry_row.grid(column=3, row=8)
+
+def main():
+    global main_window
+    global hired_details, entry_full_name, entry_item, entry_number_hired, entry_price, entry_receipt_num, entry_row, total_entries
+    hired_details = []
+    total_entries = 0
+    setup_buttons()
+    main_window.mainloop()
+
+main()
     
     
               

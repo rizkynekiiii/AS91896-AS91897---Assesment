@@ -7,7 +7,7 @@ def quit():
     main_window.destroy()
 
 def print_hired_details():
-    global j_names, total_entries, name_count
+    global j_names, total_entries, name_count #Labels here will be printer inot the main_window
     name_count = 0
     Label(main_window, text="Row").grid(column=1, row=10)
     Label(main_window, text="Full Name").grid(column=2, row=10)
@@ -16,21 +16,22 @@ def print_hired_details():
     Label(main_window, text="Number of Hired").grid(column=5, row=10)
     Label(main_window, text="Price").grid(column=6, row=10)
     Label(main_window, text="Cost").grid(column=7, row=10)
-
+#This prints the details on the main_window
     while name_count < total_entries :
-        Label(main_window, text=name_count).grid(column=1, row=name_count+8)
-        Label(main_window, text=(hired_details[name_count][0])).grid(column=2, row=name_count+8)
-        Label(main_window, text=(hired_details[name_count][1])).grid(column=3, row=name_count+8)
-        Label(main_window, text=(hired_details[name_count][2])).grid(column=4, row=name_count+8)
-        Label(main_window, text=(hired_details[name_count][3])).grid(column=5, row=name_count+8)
-        Label(main_window, text=(hired_details[name_count][4])).grid(column=6, row=name_count+8)
-        Label(main_window, text=(hired_details[name_count][5])).grid(column=7, row=name_count+8)
+        Label(main_window, text=name_count).grid(column=1, row=name_count+11)
+        Label(main_window, text=(hired_details[name_count][0])).grid(column=2, row=name_count+11)
+        Label(main_window, text=(hired_details[name_count][1])).grid(column=3, row=name_count+11)
+        Label(main_window, text=(hired_details[name_count][2])).grid(column=4, row=name_count+11)
+        Label(main_window, text=(hired_details[name_count][3])).grid(column=5, row=name_count+11)
+        Label(main_window, text=(hired_details[name_count][4])).grid(column=6, row=name_count+11)
+        Label(main_window, text=(hired_details[name_count][5])).grid(column=7, row=name_count+11)
         name_count += 1
-
+#buttons setup and commands
 def setup_buttons():
     global hired_details, entry_full_name, entry_item, entry_number_hired, entry_price, entry_receipt_num, entry_row
     Button(main_window, text="Print Details",command=print_hired_details).grid(column=3, row=2)
     Button(main_window, text="Quit",command=quit).grid(column=7, row=2)
+    Button(main_window, text="Append",command=append_details).grid(column=2,row=2)
     Label(main_window, text="Julie's Party Hire").grid(column=4, row=0)
     Label(main_window, text="Full Name :").grid(column=2, row=3)
     entry_full_name = Entry(main_window)
@@ -52,8 +53,18 @@ def setup_buttons():
     entry_row.grid(column=3, row=8)
 
 #def append_details():
-    
-    
+def append_details():
+    global hired_details, entry_full_name, entry_item, entry_number_hired, entry_price, entry_receipt_num, entry_row, total_entries
+    if len(entry_full_name.get()) != 0 :
+        hired_details.append([entry_full_name.get(),entry_item.get(),entry_number_hired.get(),entry_price.get(),entry_receipt_num.get(),entry_row.get()])
+        entry_full_name.delete(0,'end')
+        entry_item.delete(0,'end')
+        entry_number_hired.delete(0,'end')
+        entry_price.delete(0,'end')
+        entry_receipt_num.delete(0,'end')
+        entry_row.delete(0,'end')
+        total_entries +=  1
+
 
 #Combobox and Spinbox
 #Items of Hirement
@@ -74,16 +85,15 @@ ComboBox = ttk.Combobox(main_window, textvariable=receipt_num,
 
 def main():
     global main_window
-    global hired_details, entry_full_name, entry_item, entry_number_hired, entry_price, entry_receipt_num, entry_row
+    global hired_details, entry_full_name, entry_item, entry_number_hired, entry_price, entry_receipt_num, entry_row, total_entries
     hired_details = []
     total_entries = 0
     setup_buttons()
     main_window.mainloop()
 
 main()
-    
+           
 
 
-              
 
 
