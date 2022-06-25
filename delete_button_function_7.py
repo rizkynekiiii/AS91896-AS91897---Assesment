@@ -90,6 +90,23 @@ def append_details():
         entry_row.delete(0,'end')
         total_entries +=  1
 
+def delete_row():
+    # these are the global variables that are used
+    global hired_details, entry_row, total_entries, name_count
+    # find which row is to be deleted and delete it
+    del hired_details[int(entry_row.get())]
+    total_entries = total_entries - 1
+    entry_row.delete(0, 'end')
+    # clear the last item displayed on the GUI
+    Label(main_window, text="        ",width=11).grid(column=1, row=name_count+10)
+    Label(main_window, text="        ",width=11).grid(column=2, row=name_count+10)
+    Label(main_window, text="        ",width=11).grid(column=3, row=name_count+10)
+    Label(main_window, text="        ",width=11).grid(column=4, row=name_count+10)
+    Label(main_window, text="        ",width=11).grid(column=5, row=name_count+10)
+    Label(main_window, text="        ",width=11).grid(column=6, row=name_count+10)
+    Label(main_window, text="        ",width=11).grid(column=7, row=name_count+10)
+    # print all the items in the list
+    print_hired_details()
 
 
 #Combobox and Spinbox
@@ -113,7 +130,6 @@ def main():
 
 main()
            
-
 
 
 
